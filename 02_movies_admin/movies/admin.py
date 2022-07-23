@@ -25,6 +25,7 @@ class PersonFilmworkInline(admin.TabularInline):
     model = PersonFilmwork
 
 
+
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
     inlines = (PersonFilmworkInline,)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 00:01+1000\n"
+"POT-Creation-Date: 2022-07-15 01:01+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1227,7 +1227,7 @@ msgstr "описание"
 msgid "Genre"
 msgstr "Жанр"
 
-#: .\movies\models.py:39
+#: .\movies\models.py:39 .\movies\models.py:60 .\movies\models.py:81
 msgid "movie"
 msgstr "фильм"
 
@@ -1238,6 +1238,10 @@ msgstr "телесериал"
 #: .\movies\models.py:42
 msgid "title"
 msgstr "название"
+
+#: .\movies\models.py:44
+msgid "creation_date"
+msgstr "дата выхода"
 
 #: .\movies\models.py:45
 msgid "rating"
@@ -1255,26 +1259,42 @@ msgstr "Кинопроизведение"
 msgid "Movies"
 msgstr "Кинопроизведения"
 
+#: .\movies\models.py:61
+msgid "genre"
+msgstr "Жанр"
+
 #: .\movies\models.py:66
 msgid "GenreFilmwork"
 msgstr "Жанр кинопроизведения"
 
-#: .\movies\models.py:69
+#: .\movies\models.py:67
+msgid "GenresFilmworks"
+msgstr "Жанр кинопроизведения"
+
+#: .\movies\models.py:70
 msgid "full_name"
 msgstr "имя"
 
-#: .\movies\models.py:73
+#: .\movies\models.py:74
 msgid "Person"
 msgstr "Актер"
 
-#: .\movies\models.py:74
+#: .\movies\models.py:75
 msgid "Persons"
 msgstr "Актерский состав"
 
 #: .\movies\models.py:82
+msgid "person"
+msgstr "Актер"
+
+#: .\movies\models.py:83
 msgid "role"
 msgstr "роль"
 
-#: .\movies\models.py:87
+#: .\movies\models.py:88
 msgid "PersonFilmwork"
-msgstr "Актеры кино"
+msgstr "Актеры фильмов"
+
+#: .\movies\models.py:89
+msgid "PersonsFilmworks"
+msgstr "Актеры фильмов"

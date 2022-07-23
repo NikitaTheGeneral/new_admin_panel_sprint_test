@@ -13,11 +13,13 @@ class TimeStampedMixin(models.Model):
         # Этот параметр указывает Django, что этот класс не является представлением таблицы
         abstract = True
 
+
 class UUIDMixin(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         abstract = True
+
 
 class Genre(UUIDMixin, TimeStampedMixin):
     name = models.CharField(_('name'), max_length=255)
@@ -29,19 +31,18 @@ class Genre(UUIDMixin, TimeStampedMixin):
         verbose_name = _('Genre')
         verbose_name_plural = _('Genre')
 
-
     def __str__(self):
         return self.name
 
-class Filmwork(UUIDMixin, TimeStampedMixin):
 
+class Filmwork(UUIDMixin, TimeStampedMixin):
     class TypeChoices(models.TextChoices):
         MOVIE = 'movie', _('movie')
         TV_SHOW = 'tv_show', _('tv_show')
 
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
-    creation_date = models.DateField()
+    creation_date = models.DateField(_('creation_date'))
     rating = models.FloatField(_('rating'), blank=True,
                                validators=[MinValueValidator(0),
                                            MaxValueValidator(100)])
@@ -56,14 +57,20 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
     def __str__(self):
         return self.title
 
+
 class GenreFilmwork(UUIDMixin):
-    film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
-    genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
+    film_work = models.ForeignKey('Filmwork', verbose_name=_('movie'), on_delete=models.CASCADE)
+    genre = models.ForeignKey('Genre', verbose_name=_('genre'), on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "content\".\"genre_film_work"
         verbose_name = _('GenreFilmwork')
+        verbose_name_plural = _('GenresFilmworks')
+
+    def __str__(self):
+        return self.film_work.title
+
 
 class Person(UUIDMixin, TimeStampedMixin):
     full_name = models.CharField(_('full_name'), max_length=255)
@@ -76,12 +83,17 @@ class Person(UUIDMixin, TimeStampedMixin):
     def __str__(self):
         return self.full_name
 
+
 class PersonFilmwork(UUIDMixin):
-    film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
-    person = models.ForeignKey('Person', on_delete=models.CASCADE)
+    film_work = models.ForeignKey('Filmwork', verbose_name=_('movie'), on_delete=models.CASCADE)
+    person = models.ForeignKey('Person', verbose_name=_('person'), on_delete=models.CASCADE)
     role = models.TextField(_('role'), null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "content\".\"person_film_work"
         verbose_name = _('PersonFilmwork')
+        verbose_name_plural = _('PersonsFilmworks')
+
+    def __str__(self):
+        return self.film_work.title

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 00:01+1000\n"
+"POT-Creation-Date: 2022-07-15 01:01+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1225,7 +1225,7 @@ msgstr ""
 msgid "Genre"
 msgstr ""
 
-#: .\movies\models.py:39
+#: .\movies\models.py:39 .\movies\models.py:60 .\movies\models.py:81
 msgid "movie"
 msgstr ""
 
@@ -1235,6 +1235,10 @@ msgstr ""
 
 #: .\movies\models.py:42
 msgid "title"
+msgstr ""
+
+#: .\movies\models.py:44
+msgid "creation_date"
 msgstr ""
 
 #: .\movies\models.py:45
@@ -1253,26 +1257,42 @@ msgstr ""
 msgid "Movies"
 msgstr ""
 
+#: .\movies\models.py:61
+msgid "genre"
+msgstr ""
+
 #: .\movies\models.py:66
 msgid "GenreFilmwork"
 msgstr ""
 
-#: .\movies\models.py:69
+#: .\movies\models.py:67
+msgid "GenresFilmworks"
+msgstr ""
+
+#: .\movies\models.py:70
 msgid "full_name"
 msgstr ""
 
-#: .\movies\models.py:73
+#: .\movies\models.py:74
 msgid "Person"
 msgstr ""
 
-#: .\movies\models.py:74
+#: .\movies\models.py:75
 msgid "Persons"
 msgstr ""
 
 #: .\movies\models.py:82
+msgid "person"
+msgstr ""
+
+#: .\movies\models.py:83
 msgid "role"
 msgstr ""
 
-#: .\movies\models.py:87
+#: .\movies\models.py:88
 msgid "PersonFilmwork"
+msgstr ""
+
+#: .\movies\models.py:89
+msgid "PersonsFilmworks"
 msgstr ""
