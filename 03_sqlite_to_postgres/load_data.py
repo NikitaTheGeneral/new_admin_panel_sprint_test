@@ -1,11 +1,12 @@
 import sqlite3
+from dotenv import dotenv_values
 
 import psycopg2
 from psycopg2.extensions import connection as _connection
 from psycopg2.extras import DictCursor
 
-from tables import *
-
+from tables import sql_to_dataclass, pg_insert, data_fromdataclass, batch_check, film_work, genre, person, \
+    genre_film_work, person_film_work
 
 class SQLiteLoader(object):
 
@@ -23,7 +24,6 @@ class SQLiteLoader(object):
             sql_data = curs.fetchall()
             for row in sql_data:
                 movie = sql_to_dataclass(table, row)
-                print(movie)
                 data.append(movie)
         return data
 
@@ -64,10 +64,11 @@ def load_from_sqlite(connection: sqlite3.Connection, pg_conn: _connection, table
 
 
 if __name__ == '__main__':
-    dsl = {'dbname': 'movies_db', 'user': 'app', 'password': '123qwe', 'host': '127.0.0.1', 'port': 5432}
+    dsl = eval(dotenv_values().get('dsl'))
     with sqlite3.connect('db.sqlite') as sqlite_conn, psycopg2.connect(**dsl, cursor_factory=DictCursor) as _connection:
         load_from_sqlite(sqlite_conn, _connection, table=film_work)
         load_from_sqlite(sqlite_conn, _connection, table=genre)
         load_from_sqlite(sqlite_conn, _connection, table=person)
         load_from_sqlite(sqlite_conn, _connection, table=genre_film_work)
         load_from_sqlite(sqlite_conn, _connection, table=person_film_work)
+    sqlite_conn.close()

@@ -1,4 +1,5 @@
 import sqlite3
+from dotenv import dotenv_values
 
 import psycopg2
 from psycopg2.extensions import connection as _connection
@@ -46,7 +47,8 @@ def check_consistency(sqlite_conn, _connection):
     print('таблицы и количество записей: ок')
 
 if __name__ == '__main__':
-    dsl = {'dbname': 'movies_db', 'user': 'app', 'password': '123qwe', 'host': '127.0.0.1', 'port': 5432}
+    dsl = eval(dotenv_values().get('dsl'))
     with sqlite3.connect('D:\Program Files (x86)\PythonPractice\\new_admin_panel_sprint_1\\03_sqlite_to_postgres/db.sqlite') as sqlite_conn, psycopg2.connect(**dsl, cursor_factory=DictCursor) as _connection:
         check_consistency(sqlite_conn, _connection)
+    sqlite_conn.close()
 

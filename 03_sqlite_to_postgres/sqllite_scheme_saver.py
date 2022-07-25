@@ -16,6 +16,7 @@ with sqlite3.connect('db.sqlite') as sql_conn:
         curs.execute(f'''SELECT COUNT(*) FROM {i[0]}''')
         film_work_size = curs.fetchone()
         sql_data[i[0]] = film_work_size[0]
+sql_conn.close()
 
 print(sql_data)
 
