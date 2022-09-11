@@ -33,6 +33,16 @@ class Genre(UUIDMixin, TimeStampedMixin):
     def __str__(self):
         return self.name
 
+class Person(UUIDMixin, TimeStampedMixin):
+    full_name = models.CharField(_('full_name'), max_length=255)
+
+    class Meta:
+        db_table = "content\".\"person"
+        verbose_name = _('Person')
+        verbose_name_plural = _('Persons')
+
+    def __str__(self):
+        return self.full_name
 
 class Filmwork(UUIDMixin, TimeStampedMixin):
     class TypeChoices(models.TextChoices):
@@ -47,6 +57,7 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
                                            MaxValueValidator(100)])
     type = models.CharField(_('type'), choices=TypeChoices.choices, max_length=255)
     genres = models.ManyToManyField(Genre, through='GenreFilmwork')
+    persons = models.ManyToManyField(Person, through='PersonFilmwork')
 
     class Meta:
         db_table = "content\".\"film_work"
@@ -71,19 +82,6 @@ class GenreFilmwork(UUIDMixin):
 
     def __str__(self):
         return self.film_work.title
-
-
-class Person(UUIDMixin, TimeStampedMixin):
-    full_name = models.CharField(_('full_name'), max_length=255)
-
-    class Meta:
-        db_table = "content\".\"person"
-        verbose_name = _('Person')
-        verbose_name_plural = _('Persons')
-
-    def __str__(self):
-        return self.full_name
-
 
 class PersonFilmwork(UUIDMixin):
     class RoleChoices(models.TextChoices):

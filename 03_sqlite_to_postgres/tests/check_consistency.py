@@ -48,7 +48,7 @@ def check_consistency(sqlite_conn, _connection):
 
 if __name__ == '__main__':
     dsl = eval(dotenv_values().get('dsl'))
-    with sqlite3.connect('D:\Program Files (x86)\PythonPractice\\new_admin_panel_sprint_1\\03_sqlite_to_postgres/db.sqlite') as sqlite_conn, psycopg2.connect(**dsl, cursor_factory=DictCursor) as _connection:
+    with sqlite3.connect('/home/nikita/PycharmProjects/new_admin_panel_sprint_1/03_sqlite_to_postgres/db.sqlite') as sqlite_conn, psycopg2.connect(**dsl, cursor_factory=DictCursor) as _connection:
         check_consistency(sqlite_conn, _connection)
     sqlite_conn.close()
 
