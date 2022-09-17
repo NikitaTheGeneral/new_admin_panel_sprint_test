@@ -1,0 +1,9 @@
+/02_movies_admin
+/venv
+/01_schema_design
+/03_sqlite_to_postgres
+/configs
+/data
+docker-compose.yml
+nginx.conf
+README.md

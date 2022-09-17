@@ -25,6 +25,8 @@ class MoviesListApi(MoviesApiMixin, BaseListView):
     paginate_by = 50
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        prevpage = None
+        nextpage = None
         queryset = self.get_queryset()
         paginator, page, queryset, is_paginated = self.paginate_queryset(
             queryset,
@@ -32,28 +34,19 @@ class MoviesListApi(MoviesApiMixin, BaseListView):
         )
 
         if page.has_previous() and page.has_next():
-            context = {
-                'count': paginator.count,
-                'total_pages': paginator.num_pages,
-                'prev': page.previous_page_number(),
-                'next': page.next_page_number(),
-                'results': list(queryset),
-            }
+            prevpage = page.previous_page_number()
+            nextpage = page.next_page_number()
         elif page.has_previous():
-            context = {
-                'count': paginator.count,
-                'total_pages': paginator.num_pages,
-                'prev': page.previous_page_number(),
-                'next': None,
-                'results': list(queryset),
-            }
-        else:
-            context = {
-                'count': paginator.count,
-                'total_pages': paginator.num_pages,
-                'prev': None,
-                'next': page.next_page_number(),
-                'results': list(queryset),
+            prevpage = page.previous_page_number()
+        elif page.has_next():
+            nextpage = page.next_page_number()
+
+        context = {
+            'count': paginator.count,
+            'total_pages': paginator.num_pages,
+            'prev': prevpage,
+            'next': nextpage,
+            'results': list(queryset),
             }
         return context
 
